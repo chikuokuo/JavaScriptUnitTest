@@ -2,31 +2,31 @@
 
 });
 
-function GetStake(betType = "") {
-    var defaultStake = localStorage["PreviousStake" + betType];
-    console.log(defaultStake);
-    if (defaultStake === "0"
-        || defaultStake === ""
-        || defaultStake === "undefined"
-        || typeof (defaultStake) === "undefined")
-        defaultStake = "0";
+function GetLocalStorageData(betType = "") {
+    var defaultData = localStorage["Previous" + betType];
+    console.log(defaultData);
+    if (defaultData === "0"
+        || defaultData === ""
+        || defaultData === "undefined"
+        || typeof (defaultData) === "undefined")
+        defaultData = "0";
     else {
-        defaultStake = formatNumber(defaultStake.replace(/,/g, ""));
+        defaultData = formatNumber(defaultData.replace(/,/g, ""));
     }
 
-    return defaultStake;
+    return defaultData;
 }
 
 
-function FormatOddsType(oddsType, betInfo) {
-    switch (betInfo) {
-    case "Correct Score":
-        return oddsType.toString().replace(":", "");
-    case "Total Goal":
-        return oddsType.toString().replace("+", "over");
+function FormatType(type, info) {
+    switch (info) {
+    case "Correct":
+        return type.toString().replace(":", "");
+    case "Total":
+        return type.toString().replace("+", "over");
     default:
-        return oddsType;
+        return type;
     }
 }
 
-module.exports = { FormatOddsType, GetStake };
+module.exports = { GetLocalStorageData, FormatType };
